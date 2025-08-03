@@ -24,6 +24,18 @@ public class RouteController {
         return "people";
     }
 
+    @GetMapping("/rank")
+    public String rankThings(Model model) {
+        List<Person> options = personRepository.findTwoRandomOptions();
+        if (options.size() < 2) {
+            model.addAttribute("error", "Not enough options available.");
+            return "error";
+        }
+        model.addAttribute("option1", options.get(0));
+        model.addAttribute("option2", options.get(1));
+        return "rankThings";
+    }
+
     @GetMapping("/")
     public String index() {
         return "Greetings";
