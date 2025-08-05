@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pick One</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f4f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .option-container {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .option-form {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .option-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .option-button:hover {
+            background-color: #0056b3;
+        }
+
+        .skip-button {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .skip-button:hover {
+            background-color: #495057;
+        }
+    </style>
+</head>
+<body>
+<h1>Which do you prefer?</h1>
+
+<div class="option-container">
+    <form method="post" th:action="@{/options/vote}" class="option-form">
+        <input type="hidden" name="selectedId" th:value="${option1.id}" />
+        <input type="hidden" name="otherId" th:value="${option2.id}" />
+        <div th:text="${option1.name}" style="font-size: 18px; font-weight: bold;"></div>
+        <button type="submit" class="option-button">Choose</button>
+    </form>
+
+    <form method="post" th:action="@{/options/vote}" class="option-form">
+        <input type="hidden" name="selectedId" th:value="${option2.id}" />
+        <input type="hidden" name="otherId" th:value="${option1.id}" />
+        <div th:text="${option2.name}" style="font-size: 18px; font-weight: bold;"></div>
+        <button type="submit" class="option-button">Choose</button>
+    </form>
+</div>
+
+<form method="post" th:action="@{/options/skip}">
+    <input type="hidden" name="option1Id" th:value="${option1.id}" />
+    <input type="hidden" name="option2Id" th:value="${option2.id}" />
+    <button type="submit" class="skip-button">Skip</button>
+</form>
+</body>
+</html>

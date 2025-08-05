@@ -3,41 +3,46 @@ package org.wujo.rankEverything;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.wujo.rankEverything.database.entry.Person;
-import org.wujo.rankEverything.database.repository.PersonRepository;
+import org.wujo.rankEverything.service.OptionService;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/options")
 public class RouteController {
 
-    private final PersonRepository personRepository;
+    private final OptionService optionService;
 
-    public RouteController(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public RouteController(OptionService optionService) {
+        this.optionService = optionService;
     }
 
-    @GetMapping("/people")
-    public String getAllPeople(Model model) {
-        List<Person> people = personRepository.findAll();
-        model.addAttribute("people", people);
-        return "people";
-    }
+    // Display comparison page
+    @GetMapping("/compare")
+    public String showComparison(Model model) {
+        List<Person> options = optionService.getTwoRandomOptions();
 
-    @GetMapping("/rank")
-    public String rankThings(Model model) {
-        List<Person> options = personRepository.findTwoRandomOptions();
-        if (options.size() < 2) {
-            model.addAttribute("error", "Not enough options available.");
-            return "error";
-        }
         model.addAttribute("option1", options.get(0));
         model.addAttribute("option2", options.get(1));
-        return "rankThings";
+
+        return "compare";  // Thymeleaf template: resources/templates/compare.html
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "Greetings";
+    // Handle a vote
+    @PostMapping("/vote")
+    public String handleVote(@RequestParam Long selectedId, @RequestParam Long otherId) {
+        optionService.recordSelection(selectedId, otherId);
+        return "redirect:/options/compare";
+    }
+
+    // Handle skip
+    @PostMapping("/skip")
+    public String handleSkip(@RequestParam Long option1Id, @RequestParam Long option2Id) {
+        optionService.recordSkip(option1Id, option2Id);
+        return "redirect:/options/compare";
     }
 }
