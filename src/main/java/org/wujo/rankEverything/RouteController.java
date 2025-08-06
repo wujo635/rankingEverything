@@ -45,4 +45,16 @@ public class RouteController {
         optionService.recordSkip(option1Id, option2Id);
         return "redirect:/options/compare";
     }
+
+    @GetMapping("/new")
+    public String showAddForm() {
+        return "add";
+    }
+
+    @PostMapping("/add")
+    public String addOption(@RequestParam String name) {
+        optionService.addNewOption(name);
+        return "redirect:/options/compare";
+    }
+
 }

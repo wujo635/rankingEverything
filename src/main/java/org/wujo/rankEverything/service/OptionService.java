@@ -55,4 +55,9 @@ public class OptionService {
         System.out.printf("User skipped comparison between ID %d and ID %d%n", id1, id2);
         // Optionally log to a skip table or analytics service
     }
+
+    public void addNewOption(String name) {
+        Person newOption = new Person(name, 0, 0);
+        optionRepository.save(newOption);
+    }
 }
