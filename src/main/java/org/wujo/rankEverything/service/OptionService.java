@@ -7,6 +7,7 @@ import org.wujo.rankEverything.database.entry.Person;
 import org.wujo.rankEverything.database.repository.PersonRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OptionService {
@@ -60,4 +61,11 @@ public class OptionService {
         Person newOption = new Person(name, 0, 0);
         optionRepository.save(newOption);
     }
+
+    public List<Person> findAllSortedByScore() {
+        return optionRepository.findAll().stream()
+                .sorted(Comparator.comparingInt(o -> -(o.getUpvote() - o.getDownvote())))
+                .collect(Collectors.toList());
+    }
+
 }

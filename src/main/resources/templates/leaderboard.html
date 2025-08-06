@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Leaderboard</title>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        padding: 40px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 60%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<h1>Leaderboard</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+<!--    <th>Upvotes</th>-->
+<!--    <th>Downvotes</th>-->
+    <th>Score</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="option, iterStat : ${options}">
+    <td th:text="${iterStat.index + 1}"></td>
+    <td th:text="${option.name}"></td>
+<!--    <td th:text="${option.upvote}"></td>-->
+<!--    <td th:text="${option.downvote}"></td>-->
+    <td th:text="${option.upvote - option.downvote}"></td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/options/compare}">← Back to Compare</a>
+</body>
+</html>

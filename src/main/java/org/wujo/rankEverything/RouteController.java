@@ -57,4 +57,11 @@ public class RouteController {
         return "redirect:/options/compare";
     }
 
+    @GetMapping("/leaderboard")
+    public String showLeaderboard(Model model) {
+        List<Person> options = optionService.findAllSortedByScore();
+        model.addAttribute("options", options);
+        return "leaderboard";
+    }
+
 }
