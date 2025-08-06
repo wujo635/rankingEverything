@@ -71,7 +71,7 @@
 <div class="form-container">
     <form th:action="@{/options/add}" method="post">
         <label for="name">Option Name:</label>
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" autocomplete="off" required />
         <button type="submit">Add Option</button>
     </form>
     <a th:href="@{/options/compare}">Back to Compare</a>
