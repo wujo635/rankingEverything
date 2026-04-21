@@ -12,12 +12,8 @@ import java.util.List;
 @Repository
 public interface OptionRepository extends JpaRepository<Option, Long> {
 
-    @Query(value = "SELECT * FROM test.option ORDER BY RANDOM() LIMIT 2", nativeQuery = true)
+    @Query(value = "SELECT * FROM option ORDER BY RANDOM() LIMIT 2", nativeQuery = true)
     List<Option> findTwoRandomOptions();
-
-
-//    @Query(value = "SELECT * FROM option ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
-//    Option findRandomOption();
 
     @Modifying
     @Transactional
@@ -29,4 +25,3 @@ public interface OptionRepository extends JpaRepository<Option, Long> {
     @Query("UPDATE Option o SET o.downvote = o.downvote + 1 WHERE o.id = :id")
     void incrementDownvote(Long id);
 }
-

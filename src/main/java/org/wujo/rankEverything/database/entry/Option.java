@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "test")
+@Table(name = "option", schema = "public")
 @Getter
 public class Option implements Serializable {
     @Id
@@ -25,4 +25,3 @@ public class Option implements Serializable {
 
     public Option(){}
 }
-
