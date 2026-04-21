@@ -3,8 +3,8 @@ package org.wujo.rankEverything.service;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import org.wujo.rankEverything.database.entry.Person;
-import org.wujo.rankEverything.database.repository.PersonRepository;
+import org.wujo.rankEverything.database.entry.Option;
+import org.wujo.rankEverything.database.repository.OptionRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 @Service
 public class OptionService {
 
-    private final PersonRepository optionRepository;
+    private final OptionRepository optionRepository;
 
-    public OptionService(PersonRepository optionRepository) {
+    public OptionService(OptionRepository optionRepository) {
         this.optionRepository = optionRepository;
     }
 
     /**
      * Fetches two random, non-duplicate options from the database.
      */
-    public List<Person> getTwoRandomOptions() {
-        List<Person> options = optionRepository.findTwoRandomOptions();
+    public List<Option> getTwoRandomOptions() {
+        List<Option> options = optionRepository.findTwoRandomOptions();
 
         // TODO - figure out if need fallback if less than 2 unique options
         if (options.size() < 2) {
@@ -37,9 +37,9 @@ public class OptionService {
      */
     @Transactional
     public void recordSelection(Long selectedId, Long otherId) {
-        Person selected = optionRepository.findById(selectedId)
+        Option selected = optionRepository.findById(selectedId)
                 .orElseThrow(() -> new RuntimeException("Selected option not found"));
-        Person other = optionRepository.findById(otherId)
+        Option other = optionRepository.findById(otherId)
                 .orElseThrow(() -> new RuntimeException("Other option not found"));
 
         // Increment upvote for selected option
@@ -58,11 +58,11 @@ public class OptionService {
     }
 
     public void addNewOption(String name) {
-        Person newOption = new Person(name, 0, 0);
+        Option newOption = new Option(name, 0, 0);
         optionRepository.save(newOption);
     }
 
-    public List<Person> findAllSortedByScore() {
+    public List<Option> findAllSortedByScore() {
         return optionRepository.findAll().stream()
                 .sorted(Comparator.comparingInt(o -> -(o.getUpvote() - o.getDownvote())))
                 .collect(Collectors.toList());

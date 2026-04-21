@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.wujo.rankEverything.database.entry.Person;
+import org.wujo.rankEverything.database.entry.Option;
 import org.wujo.rankEverything.service.OptionService;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class RouteController {
     // Display comparison page
     @GetMapping("/compare")
     public String showComparison(Model model) {
-        List<Person> options = optionService.getTwoRandomOptions();
+        List<Option> options = optionService.getTwoRandomOptions();
 
         model.addAttribute("option1", options.get(0));
         model.addAttribute("option2", options.get(1));
@@ -59,7 +59,7 @@ public class RouteController {
 
     @GetMapping("/leaderboard")
     public String showLeaderboard(Model model) {
-        List<Person> options = optionService.findAllSortedByScore();
+        List<Option> options = optionService.findAllSortedByScore();
         model.addAttribute("options", options);
         return "leaderboard";
     }
