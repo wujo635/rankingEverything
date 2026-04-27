@@ -1,0 +1,246 @@
+/* Unified Color Palette & Variables */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --success-color: #28a745;
+    --success-hover: #218838;
+    --bg-light: #f4f4f4;
+    --bg-white: #ffffff;
+    --text-dark: #333;
+    --text-muted: #555;
+    --border-light: #ddd;
+    --shadow: 0 4px 10px rgba(0,0,0,0.1);
+    --radius: 10px;
+    --btn-radius: 6px;
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* Typography */
+h1 {
+    color: var(--text-dark);
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+h2 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* Forms & Inputs */
+form {
+    background-color: var(--bg-white);
+    padding: 20px 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+input[type="text"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--btn-radius);
+    border: 1px solid var(--border-light);
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.form-container {
+    background-color: var(--bg-white);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 300px;
+    margin: 0 auto;
+}
+
+/* Buttons */
+button {
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: var(--success-hover);
+}
+
+.btn-lg {
+    font-size: 18px;
+    padding: 12px 20px;
+}
+
+.btn-skip {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-skip:hover {
+    background-color: #5a6268;
+}
+
+/* Layout & Containers */
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+.container-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Navigation */
+nav {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
+
+/* Tables */
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 60%;
+    max-width: 100%;
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-light);
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Utility Classes */
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.mb-30 { margin-bottom: 30px; }
+.p-20 { padding: 20px; }
+.p-40 { padding: 40px; }
+.gap-40 { gap: 40px; }
+.gap-20 { gap: 20px; }
+
+.text-center { text-align: center; }
+.text-muted { color: var(--text-muted); }
+.text-small { font-size: 14px; }
+
+/* Instructions & Help Text */
+.instructions {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .container-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px 12px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    form {
+        width: 100%;
+        padding: 15px 20px;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        display: block;
+        padding: 8px 0;
+    }
+}
+
